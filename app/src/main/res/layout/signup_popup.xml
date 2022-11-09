@@ -50,6 +50,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEditText"
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -80,6 +81,7 @@
             android:layout_width="250dp"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/nameTextField"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +93,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="birthday"
+            android:hint="birthday (980304)"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nameTextField"
@@ -100,6 +102,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/birthEditText"
+                android:inputType="date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
