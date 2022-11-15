@@ -11,7 +11,8 @@ class FriendListActivity : AppCompatActivity() {
         //super.onCreate(savedInstanceState, persistentState)
         //binding = FriendBinding.inflate(layoutInflater)
         //setContentView(binding.root)
-        setContentView(R.layout.feed)
+        super.onCreate(savedInstanceState, persistentState)
+        setContentView(R.layout.friend)
 
         //binding.userSearch.setOnClickListener {
         //    SignupDialogFragment().show(supportFragmentManager, "signupDialog")
