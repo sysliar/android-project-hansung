@@ -59,6 +59,8 @@ class LoginActivity : AppCompatActivity() {
     fun moveMainPage(user: FirebaseUser?){
         if( user!= null){
             startActivity(Intent(this,FeedActivity::class.java))
+            //startActivity(Intent(this,FriendListActivity::class.java))
+
 //            finish()
         }
     }
