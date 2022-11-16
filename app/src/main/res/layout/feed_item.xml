@@ -35,7 +35,7 @@
             app:srcCompat="@drawable/ic_baseline_person_24" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/userName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -78,7 +78,7 @@
             app:srcCompat="@drawable/ic_baseline_comment_24" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/content"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"

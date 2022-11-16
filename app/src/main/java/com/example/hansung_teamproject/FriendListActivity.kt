@@ -1,12 +1,11 @@
 package com.example.hansung_teamproject
 
-import android.app.ProgressDialog.show
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hansung_teamproject.databinding.FriendBinding
+import com.example.hansung_teamproject.feed.FeedActivity
 
 class FriendListActivity : AppCompatActivity() {
     private lateinit var binding : FriendBinding

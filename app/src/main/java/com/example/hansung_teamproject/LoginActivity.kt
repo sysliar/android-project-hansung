@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.hansung_teamproject.databinding.LoginBinding
+import com.example.hansung_teamproject.feed.FeedActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -58,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
     // 유저정보 넘겨주고 메인 액티비티 호출
     fun moveMainPage(user: FirebaseUser?){
         if( user!= null){
-            startActivity(Intent(this,FeedActivity::class.java))
+            startActivity(Intent(this, FeedActivity::class.java))
             //startActivity(Intent(this,FriendListActivity::class.java))
 
 //            finish()
