@@ -39,7 +39,11 @@ class FriendListActivity : AppCompatActivity() {
         }
 
         binding.userSearch.setOnClickListener {
-            FriendSearchDialogFragment().show(supportFragmentManager, "friendSearchDialog")
+            var friendSearchDialogFragment: FriendSearchDialogFragment = FriendSearchDialogFragment()
+            var bundle: Bundle = Bundle()
+            bundle.putString("searchString", binding.friendSearchEditText.text.toString())
+            friendSearchDialogFragment.arguments = bundle
+            friendSearchDialogFragment.show(supportFragmentManager, "friendSearchDialog")
         }
     }
 }
