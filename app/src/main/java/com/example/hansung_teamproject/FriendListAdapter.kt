@@ -29,6 +29,13 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = FriendListBinding.inflate(layoutInflater, parent, false)
+        binding.friendListRemove.setOnClickListener {
+            //TODO - 친구 삭제
+        }
+
+        binding.root.setOnClickListener {
+            //TODO - 친구 글 모아보기
+        }
         return ViewHolder(binding)
     }
 

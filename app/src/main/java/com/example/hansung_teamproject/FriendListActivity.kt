@@ -30,7 +30,9 @@ class FriendListActivity : AppCompatActivity() {
         binding.recyclerView3.setHasFixedSize(true)
 
         //recyclerView2는 FriendItemAdpater로 해야함
-        binding.recyclerView2.adapter = adapter
+        val friendRequestAdapter = FriendRequestListAdapter()
+        friendRequestAdapter.setFriendList(mList)
+        binding.recyclerView2.adapter = friendRequestAdapter
         binding.recyclerView2.layoutManager = LinearLayoutManager(this)
         binding.recyclerView2.setHasFixedSize(true)
 
