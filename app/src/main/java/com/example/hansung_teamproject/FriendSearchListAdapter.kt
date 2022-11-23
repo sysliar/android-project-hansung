@@ -11,7 +11,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class FriendSearchListAdapter : RecyclerView.Adapter<FriendSearchListAdapter.ViewHolder>() {
-    var userList: ArrayList<User> = arrayListOf()
+    var userList: ArrayList<Friend> = arrayListOf()
     val db = Firebase.firestore
 
     inner class ViewHolder(private val binding: FriendSearchItemBinding) :
@@ -19,6 +19,7 @@ class FriendSearchListAdapter : RecyclerView.Adapter<FriendSearchListAdapter.Vie
         fun setContents(pos: Int) {
             with(userList) {
                 binding.friendSearchListName.text = userList[pos].name
+                binding.searchUserEmailTextView.text = userList[pos].email
             }
         }
     }
@@ -27,25 +28,10 @@ class FriendSearchListAdapter : RecyclerView.Adapter<FriendSearchListAdapter.Vie
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = FriendSearchItemBinding.inflate(layoutInflater, parent, false)
         binding.friendRequestButton.setOnClickListener {
-            // firebase 친구 신청
-            var friendEmail: String = ""
-            db.collection("users")
-                .whereEqualTo("name", binding.friendSearchListName.text.toString()).get()
-                .addOnSuccessListener { documents ->
-                    for (document in documents) {
-                        friendEmail = document.data["email"] as String
-                    }
-                    val newFriendRequest: HashMap<String, Any> = hashMapOf(
-                        "name" to myName,
-                        "email" to myEmail
-                    )
-                    db.collection("users/${friendEmail}/friend_request").add(newFriendRequest)
-                        .addOnSuccessListener {
-                            Log.d("Firestore", "Friend Request Complete")
-                        }
-
-                }
-
+            db.collection("users/${binding.searchUserEmailTextView.text.toString()}/friend_request")
+                .document("${myEmail}").set(
+                Friend("${myName}", "${myEmail}")
+            )
         }
         return ViewHolder(binding)
     }
@@ -58,15 +44,16 @@ class FriendSearchListAdapter : RecyclerView.Adapter<FriendSearchListAdapter.Vie
         return userList.size
     }
 
-    fun search(serachWord: String) {
+    fun search(searchWord: String) {
         db?.collection("users")
             ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 // ArrayList 비워줌
                 userList.clear()
 
                 for (snapshot in querySnapshot!!.documents) {
-                    if (snapshot.getString("name")!!.contains(serachWord)) {
-                        var item = snapshot.toObject(User::class.java)
+                    if (snapshot.getString("name")!!.contains(searchWord)) {
+                        var item: Friend =
+                            Friend(snapshot["name"].toString(), snapshot["email"].toString())
                         userList.add(item!!)
                     }
                 }

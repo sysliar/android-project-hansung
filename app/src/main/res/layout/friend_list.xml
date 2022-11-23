@@ -36,6 +36,14 @@
             android:layout_weight="1"
             android:backgroundTint="#FF0000"
             android:text="삭제" />
+
+        <TextView
+            android:id="@+id/friendEmailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:visibility="gone" />
     </LinearLayout>
 
     <View

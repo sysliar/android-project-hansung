@@ -4,44 +4,54 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.databinding.FriendBinding
 import com.example.hansung_teamproject.feed.FeedActivity
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FriendListActivity : AppCompatActivity() {
-    private lateinit var binding : FriendBinding
+    private lateinit var binding: FriendBinding
+    val db = Firebase.firestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FriendBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //RecyclerView 테스트용 ArrayList
-        val mList : ArrayList<String> = ArrayList()
-        mList.add("사용자1")
-        mList.add("사용자2")
-        mList.add("사용자3")
-        mList.add("사용자4")
-        mList.add("사용자5")
-        mList.add("사용자6")
+        val friendList: ArrayList<Friend> = arrayListOf()
+        val friendListAdapter = FriendListAdapter()
+        db.collection("users/${myEmail}/friend").get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                println(document.data["name"])
+                friendList.add(Friend(document.data["name"] as String, document.data["email"] as String))
+            }
+            friendListAdapter.setFriendList(friendList)
+        }
+        binding.friendListRecyclerView.adapter = friendListAdapter
+        binding.friendListRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.friendListRecyclerView.setHasFixedSize(true)
 
-        val adapter = FriendListAdapter()
-        adapter.setFriendList(mList)
-        binding.recyclerView3.adapter = adapter
-        binding.recyclerView3.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView3.setHasFixedSize(true)
 
-        //recyclerView2는 FriendItemAdpater로 해야함
+        val friendRequestList: ArrayList<Friend> = arrayListOf()
         val friendRequestAdapter = FriendRequestListAdapter()
-        friendRequestAdapter.setFriendList(mList)
-        binding.recyclerView2.adapter = friendRequestAdapter
-        binding.recyclerView2.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView2.setHasFixedSize(true)
+        db.collection("users/${myEmail}/friend_request").get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                println(document.data["name"])
+                friendRequestList.add(Friend(document.data["name"] as String, document.data["email"] as String))
+            }
+            friendRequestAdapter.setFriendList(friendRequestList)
+        }
+        binding.friendRequestListRecyclerView.adapter = friendRequestAdapter
+        binding.friendRequestListRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.friendRequestListRecyclerView.setHasFixedSize(true)
 
         binding.friendListBack.setOnClickListener {
             startActivity(Intent(this, FeedActivity::class.java))
         }
 
         binding.userSearch.setOnClickListener {
-            var friendSearchDialogFragment: FriendSearchDialogFragment = FriendSearchDialogFragment()
+            var friendSearchDialogFragment: FriendSearchDialogFragment =
+                FriendSearchDialogFragment()
             var bundle: Bundle = Bundle()
             bundle.putString("searchString", binding.friendSearchEditText.text.toString())
             friendSearchDialogFragment.arguments = bundle

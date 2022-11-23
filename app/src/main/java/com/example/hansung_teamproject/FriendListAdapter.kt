@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.databinding.FriendListBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
-    private lateinit var mFriendList : ArrayList<String>
-
-    fun setFriendList(list: ArrayList<String>) {
+    var mFriendList : ArrayList<Friend> = arrayListOf()
+    val db = Firebase.firestore
+    fun setFriendList(list: ArrayList<Friend>) {
         mFriendList = list
         notifyDataSetChanged()
     }
@@ -17,7 +20,8 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: FriendListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun setContents(pos: Int) {
             with(mFriendList) {
-                binding.friendListName.text = mFriendList[pos]
+                binding.friendListName.text = mFriendList[pos].name
+                binding.friendEmailTextView.text = mFriendList[pos].email
             }
         }
     }
@@ -30,7 +34,9 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = FriendListBinding.inflate(layoutInflater, parent, false)
         binding.friendListRemove.setOnClickListener {
-            //TODO - 친구 삭제
+            db.collection("users/${myEmail}/friend").document(binding.friendEmailTextView.text.toString()).delete()
+            mFriendList.remove(Friend(binding.friendListName.text.toString(), binding.friendEmailTextView.text.toString()))
+            notifyDataSetChanged()
         }
 
         binding.root.setOnClickListener {
