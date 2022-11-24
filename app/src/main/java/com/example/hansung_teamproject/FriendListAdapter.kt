@@ -38,6 +38,8 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
         val binding = FriendListBinding.inflate(layoutInflater, parent, false)
         binding.friendListRemove.setOnClickListener {
             db.collection("users/${myEmail}/friend").document(binding.friendEmailTextView.text.toString()).delete()
+            db.collection("users/${binding.friendEmailTextView.text.toString()}/friend").document(
+                myEmail).delete()
             mFriendList.remove(Friend(binding.friendListName.text.toString(), binding.friendEmailTextView.text.toString()))
             notifyDataSetChanged()
         }
