@@ -1,8 +1,11 @@
 package com.example.hansung_teamproject
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.databinding.FriendListBinding
@@ -39,13 +42,16 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
             notifyDataSetChanged()
         }
 
-        binding.root.setOnClickListener {
-            //TODO - 친구 글 모아보기
-        }
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            val intent: Intent = Intent(holder.itemView?.context, FriendFeedActivity::class.java)
+            intent.putExtra("name", mFriendList[position].name)
+            intent.putExtra("email", mFriendList[position].email)
+            ContextCompat.startActivity(holder.itemView.context, intent, null)
+        }
         holder.setContents(position)
     }
 

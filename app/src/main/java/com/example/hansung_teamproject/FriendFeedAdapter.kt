@@ -1,4 +1,4 @@
-package com.example.hansung_teamproject.feed
+package com.example.hansung_teamproject
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -6,23 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hansung_teamproject.databinding.FeedBinding
 import com.example.hansung_teamproject.databinding.FeedItemBinding
+import com.example.hansung_teamproject.feed.Post
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FriendFeedAdapter(email: String, name: String) : RecyclerView.Adapter<FriendFeedAdapter.ViewHolder>() {
     private var postList: ArrayList<Post> = arrayListOf()
     var firestore : FirebaseFirestore? = null
     init {
         firestore = FirebaseFirestore.getInstance()
-        firestore?.collection("posts")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-            postList.clear()
-            for (snapshot in querySnapshot!!.documents) {
-                var item = snapshot.toObject(Post::class.java)
-                postList.add(item!!)
+        firestore?.collection("posts")?.whereEqualTo("email", email)
+            ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                postList.clear()
+                for (snapshot in querySnapshot!!.documents) {
+                    var item = snapshot.toObject(Post::class.java)
+                    postList.add(item!!)
+                }
+                notifyDataSetChanged()
             }
-            notifyDataSetChanged()
-        }
     }
 
     inner class ViewHolder(private val binding: FeedItemBinding) :
