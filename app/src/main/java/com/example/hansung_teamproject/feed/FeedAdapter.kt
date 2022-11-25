@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hansung_teamproject.databinding.FeedBinding
 import com.example.hansung_teamproject.databinding.FeedItemBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -30,6 +31,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
         fun setContents(pos: Int) {
             binding.content.text = postList[pos].content
             binding.userName.text = postList[pos].name
+
         }
     }
 
