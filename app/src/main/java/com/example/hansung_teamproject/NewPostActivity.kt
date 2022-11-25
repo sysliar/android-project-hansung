@@ -5,6 +5,7 @@ import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -74,6 +75,12 @@ class NewPostActivity : AppCompatActivity() {
                 ).show()
             }
         }
+    }
+
+    private val isExternalstorageMounted: Boolean
+    get() {
+        val state = Environment.getExternalStorageState()
+        return state == Environment.MEDIA_MOUNTED
     }
 
     private fun uploadDialog() {
