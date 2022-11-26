@@ -83,8 +83,9 @@ class NewPostActivity : AppCompatActivity() {
         return state == Environment.MEDIA_MOUNTED
     }
 
+    //permission을 READ_EXTERNAL_STORAGE에서 READ_MEDIA_IMAGES로 바꾸니 사진 읽어오기는 되는데 firebase storage에는 안올라감(println("실패"))
     private fun uploadDialog() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
             == PackageManager.PERMISSION_GRANTED) {
             println("권한 있음")
             val cursor = contentResolver.query(
@@ -98,12 +99,14 @@ class NewPostActivity : AppCompatActivity() {
                         moveToPosition(i)
                         val idIdx = getColumnIndex(MediaStore.Images.ImageColumns._ID)
                         val nameIdx = getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME)
+                        println(getLong(idIdx))
+                        println(getString(nameIdx))
                         uploadFile(getLong(idIdx), getString(nameIdx))
                     }
                 }, MediaStore.Images.ImageColumns.DISPLAY_NAME).create().show()
         } else {
             println("권한 없음")
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_MEDIA_IMAGES), REQUEST_CODE)
         }
     }
 
@@ -116,6 +119,7 @@ class NewPostActivity : AppCompatActivity() {
                 // upload success
                 Snackbar.make(binding.root, "Upload completed.", Snackbar.LENGTH_SHORT).show()
             }
+            else { println("실패") }
         }
     }
 
