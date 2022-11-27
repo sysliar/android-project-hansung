@@ -31,6 +31,7 @@
         <activity android:name=".FriendListActivity"></activity>
         <activity android:name=".NewPostActivity"></activity>
         <activity android:name=".FriendFeedActivity" android:parentActivityName=".FriendListActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

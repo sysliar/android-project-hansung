@@ -15,18 +15,11 @@
         android:icon="@drawable/ic_baseline_people_24"
         android:title="테스트"
         app:showAsAction="ifRoom" />
-
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_baseline_brightness_5_24"
-        android:title="테스트검색"
-        android:contentDescription="테스트검색"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/bookmark"
+        android:icon="@drawable/ic_baseline_bookmark_24"
+        android:title="Item"
+        app:showAsAction="always" />
 
-    <item
-        android:id="@+id/more"
-        android:title="테스트더보기"
-        android:contentDescription="더보기"
-        app:showAsAction="never" />
 
 </menu>
