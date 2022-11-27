@@ -22,9 +22,11 @@ class LoginActivity : AppCompatActivity() {
     val binding by lazy { LoginBinding.inflate(layoutInflater) }
     val db = Firebase.firestore
     var temp: String = ""
+    var temp2: String = ""
     companion object {
         var myName: String = ""
         var myEmail: String = ""
+        var myBirth: String = ""
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +61,10 @@ class LoginActivity : AppCompatActivity() {
                         db.collection("users").whereEqualTo("email", email).get().addOnSuccessListener { documents ->
                             for (document in documents) {
                                 temp =  document.data["name"] as String
+                                temp2 = document.data["birth"] as String
                             }
                             myName = temp
+                            myBirth = temp2
                             moveMainPage(auth?.currentUser)
                         }
                     } else {

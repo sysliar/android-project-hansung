@@ -61,65 +61,23 @@
         app:startIconDrawable="@drawable/ic_baseline_person_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/nameEditText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailTextField12"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="email"
-        app:endIconMode="clear_text"
-        app:layout_constraintStart_toStartOf="@+id/passwordTextField12"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextField111"
-        app:startIconContentDescription="email"
-        app:startIconDrawable="@drawable/ic_email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="58dp"
+        android:layout_height="21dp"
         android:text="이메일"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/emailTextField12"
-        app:layout_constraintEnd_toStartOf="@+id/emailTextField12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/emailTextField12" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordTextField12"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="password"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
-        app:layout_constraintTop_toBottomOf="@+id/emailTextField12"
-        app:startIconContentDescription="email"
-        app:startIconDrawable="@drawable/ic_baseline_chevron_right_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView11"
@@ -127,10 +85,9 @@
         android:layout_height="wrap_content"
         android:text="비밀번호"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/passwordTextField12"
-        app:layout_constraintEnd_toStartOf="@+id/passwordTextField12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/passwordTextField12" />
+        app:layout_constraintBottom_toBottomOf="@+id/button5"
+        app:layout_constraintStart_toStartOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/button5" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/birthTextField13"
@@ -139,13 +96,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="birthday"
-        app:layout_constraintStart_toStartOf="@+id/passwordTextField12"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextField12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/button5"
         app:startIconContentDescription="email"
         app:startIconDrawable="@drawable/ic_baseline_brightness_5_24">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/birthEditText"
+            android:id="@+id/birthEditText1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date" />
@@ -174,5 +132,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthTextField13" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="test@example.com"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextField111" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="비밀번호 재설정"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
