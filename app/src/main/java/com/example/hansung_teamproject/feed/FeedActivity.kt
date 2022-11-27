@@ -6,12 +6,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hansung_teamproject.FriendListActivity
+import com.example.hansung_teamproject.*
 import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.LoginActivity.Companion.myName
-import com.example.hansung_teamproject.NewPostActivity
-import com.example.hansung_teamproject.ProfileActivity
-import com.example.hansung_teamproject.R
 import com.example.hansung_teamproject.databinding.FeedBinding
 
 
@@ -45,6 +42,10 @@ class FeedActivity : AppCompatActivity() {
                 }
                 R.id.favorite -> {
                     startActivity(Intent(this, FriendListActivity::class.java))
+                    true
+                }
+                R.id.bookmark -> {
+                    startActivity(Intent(this, BookmarkActivity::class.java))
                     true
                 }
                 else -> false

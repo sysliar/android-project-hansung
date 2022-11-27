@@ -3,10 +3,14 @@ package com.example.hansung_teamproject.feed
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.hansung_teamproject.LoginActivity
+import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.databinding.FeedBinding
 import com.example.hansung_teamproject.databinding.FeedItemBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -24,7 +28,16 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
             ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 postList.clear()
                 for (snapshot in querySnapshot!!.documents) {
-                    var item = snapshot.toObject(Post::class.java)
+//                    var item = snapshot.toObject(Post::class.java)
+                    var item: Post = Post(
+                        snapshot["name"].toString(),
+                        snapshot["email"].toString(),
+                        snapshot["content"].toString(),
+                        snapshot["like"] as Long,
+                        snapshot["img_url"].toString(),
+                        snapshot["timestamp"] as Timestamp,
+                        snapshot.id
+                    )
                     postList.add(item!!)
                 }
                 postList.sortByDescending { it.timestamp }
@@ -47,7 +60,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
             binding.timestampTextView.text = postList[pos].timestamp.toDate().toLocaleString()
             binding.content.text = postList[pos].content
             binding.userName.text = postList[pos].name
-
+            binding.postIdTextView.text = postList[pos].id
         }
     }
 
@@ -63,6 +76,16 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = FeedItemBinding.inflate(layoutInflater, parent, false)
+        binding.bookmarkButton.setOnClickListener {
+            firestore?.collection("users/${myEmail}/bookmark")
+                ?.add(hashMapOf("documentId" to binding.postIdTextView.text))?.addOnSuccessListener {
+                    Toast.makeText(
+                        parent.context, "북마크 추가 완료",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+        }
+
         return ViewHolder(binding)
     }
 

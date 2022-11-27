@@ -8,7 +8,8 @@ data class Post(
     val name: String = "",
     val email: String = "",
     val content: String = "",
-    val like : Int = 0,
+    val like : Long = 0,
     var img_url : String = "",
-    var timestamp: Timestamp = Timestamp(0,0)
+    var timestamp: Timestamp = Timestamp(0,0),
+    var id: String = ""
 )
