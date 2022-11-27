@@ -8,5 +8,6 @@ data class Post(
     val name: String = "",
     val email: String = "",
     val content: String = "",
-    val like : Int = 0
+    val like : Int = 0,
+    val img_url : String = ""
 )

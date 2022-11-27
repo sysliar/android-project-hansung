@@ -85,7 +85,7 @@ class NewPostActivity : AppCompatActivity() {
 
     //permission을 READ_EXTERNAL_STORAGE에서 READ_MEDIA_IMAGES로 바꾸니 사진 읽어오기는 되는데 firebase storage에는 안올라감(println("실패"))
     private fun uploadDialog() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
             == PackageManager.PERMISSION_GRANTED) {
             println("권한 있음")
             val cursor = contentResolver.query(
@@ -106,7 +106,7 @@ class NewPostActivity : AppCompatActivity() {
                 }, MediaStore.Images.ImageColumns.DISPLAY_NAME).create().show()
         } else {
             println("권한 없음")
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_MEDIA_IMAGES), REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), REQUEST_CODE)
         }
     }
 
