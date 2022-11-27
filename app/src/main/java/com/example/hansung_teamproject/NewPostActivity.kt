@@ -29,6 +29,7 @@ class NewPostActivity : AppCompatActivity() {
     private lateinit var binding : PostRegisterBinding
     val db = Firebase.firestore
     lateinit var storage: FirebaseStorage
+    private var uploadfileName : String? = null
 
     companion object {
         const val REQUEST_CODE = 1
@@ -43,6 +44,7 @@ class NewPostActivity : AppCompatActivity() {
         Firebase.auth.currentUser ?: finish()
         storage = Firebase.storage
 
+        binding.textView13.text = myName
         binding.imageButton5.setOnClickListener {
             startActivity(Intent(this, FeedActivity::class.java))
         }
@@ -55,6 +57,11 @@ class NewPostActivity : AppCompatActivity() {
             val content = binding.postContent.text.toString()
             if(content.isNotEmpty()) {
                 val post = Post(myName, myEmail, content, 0)
+                if(uploadfileName != null) {
+                    post.apply {
+                        img_url = uploadfileName as String;
+                    }
+                }
                 postsCollectionRef.add(post).addOnSuccessListener {
                     Toast.makeText(
                     baseContext, "게시물 등록에 성공하였습니다.",
@@ -75,12 +82,6 @@ class NewPostActivity : AppCompatActivity() {
                 ).show()
             }
         }
-    }
-
-    private val isExternalstorageMounted: Boolean
-    get() {
-        val state = Environment.getExternalStorageState()
-        return state == Environment.MEDIA_MOUNTED
     }
 
     //permission을 READ_EXTERNAL_STORAGE에서 READ_MEDIA_IMAGES로 바꾸니 사진 읽어오기는 되는데 firebase storage에는 안올라감(println("실패"))
@@ -118,6 +119,8 @@ class NewPostActivity : AppCompatActivity() {
             if (it.isSuccessful) {
                 // upload success
                 Snackbar.make(binding.root, "Upload completed.", Snackbar.LENGTH_SHORT).show()
+                uploadfileName = fileName;
+                binding.textView14.text = uploadfileName
             }
             else { println("실패") }
         }
