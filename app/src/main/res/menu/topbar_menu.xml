@@ -3,10 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/favorite"
+        android:id="@+id/profile"
         android:icon="@drawable/ic_baseline_person_24"
-        android:title="테스트"
         android:contentDescription="테스트"
+        android:title="profile"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/favorite"
+        android:contentDescription="테스트"
+        android:icon="@drawable/ic_baseline_people_24"
+        android:title="테스트"
         app:showAsAction="ifRoom" />
 
     <item
