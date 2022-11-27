@@ -19,6 +19,7 @@ import com.example.hansung_teamproject.databinding.PostRegisterBinding
 import com.example.hansung_teamproject.feed.FeedActivity
 import com.example.hansung_teamproject.feed.Post
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -60,6 +61,7 @@ class NewPostActivity : AppCompatActivity() {
                 if(uploadfileName != null) {
                     post.apply {
                         img_url = uploadfileName as String;
+                        timestamp = Timestamp.now()
                     }
                 }
                 postsCollectionRef.add(post).addOnSuccessListener {

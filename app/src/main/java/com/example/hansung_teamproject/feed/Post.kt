@@ -9,5 +9,6 @@ data class Post(
     val email: String = "",
     val content: String = "",
     val like : Int = 0,
-    var img_url : String = ""
+    var img_url : String = "",
+    var timestamp: Timestamp = Timestamp(0,0)
 )
