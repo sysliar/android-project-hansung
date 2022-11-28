@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
@@ -41,6 +42,10 @@ class FriendListAdapter : RecyclerView.Adapter<FriendListAdapter.ViewHolder>() {
             db.collection("users/${binding.friendEmailTextView.text.toString()}/friend").document(
                 myEmail).delete()
             mFriendList.remove(Friend(binding.friendListName.text.toString(), binding.friendEmailTextView.text.toString()))
+            Toast.makeText(
+                parent.context, "친구 삭제",
+                Toast.LENGTH_SHORT
+            ).show()
             notifyDataSetChanged()
         }
 

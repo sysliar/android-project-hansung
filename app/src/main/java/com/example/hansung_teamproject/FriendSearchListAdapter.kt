@@ -3,6 +3,7 @@ package com.example.hansung_teamproject
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.LoginActivity.Companion.myName
@@ -32,6 +33,10 @@ class FriendSearchListAdapter : RecyclerView.Adapter<FriendSearchListAdapter.Vie
                 .document("${myEmail}").set(
                 Friend("${myName}", "${myEmail}")
             )
+            Toast.makeText(
+                parent.context, "친구신청 완료",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         return ViewHolder(binding)
     }

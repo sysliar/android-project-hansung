@@ -3,11 +3,13 @@ package com.example.hansung_teamproject
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hansung_teamproject.LoginActivity.Companion.myEmail
 import com.example.hansung_teamproject.LoginActivity.Companion.myName
 import com.example.hansung_teamproject.databinding.FriendItemBinding
 import com.example.hansung_teamproject.databinding.FriendListBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -50,6 +52,11 @@ class FriendRequestListAdapter : RecyclerView.Adapter<FriendRequestListAdapter.V
                 .document(binding.friendRequestEmailTextView.text.toString()).delete()
 
             friendRequestList.remove(Friend(binding.friendRequestNameTextView.text.toString(), binding.friendRequestEmailTextView.text.toString())) // view update
+            Toast.makeText(
+                parent.context, "친구신청 수락, 뒤로가기 후 돌아오면 친구가 추가되어 있어요!",
+                Toast.LENGTH_SHORT
+            ).show()
+
             notifyDataSetChanged()
         }
 
@@ -62,6 +69,10 @@ class FriendRequestListAdapter : RecyclerView.Adapter<FriendRequestListAdapter.V
                     binding.friendRequestEmailTextView.text.toString()
                 )
             )
+            Toast.makeText(
+                parent.context, "친구신청 거절",
+                Toast.LENGTH_SHORT
+            ).show()
             notifyDataSetChanged()
             Log.w("Clicked", "reject Button")
         }
