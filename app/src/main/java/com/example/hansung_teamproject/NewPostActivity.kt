@@ -63,11 +63,10 @@ class NewPostActivity : AppCompatActivity() {
         binding.button4.setOnClickListener {
             val content = binding.postContent.text.toString()
             if(content.isNotEmpty()) {
-                val post = Post(myName, myEmail, content, 0)
+                val post = Post(myName, myEmail, content, 0, "", Timestamp.now())
                 if(uploadfileName != null) {
                     post.apply {
                         img_url = uploadfileName as String;
-                        timestamp = Timestamp.now()
                     }
                 }
                 postsCollectionRef.add(post).addOnSuccessListener {
