@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             app:menu="@menu/topbar_menu"
             app:navigationIcon="@drawable/ic_baseline_control_point_24"
-            app:title="Appname" />
+            app:title="HSU-Community" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
