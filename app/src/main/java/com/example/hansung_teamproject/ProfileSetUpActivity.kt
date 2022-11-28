@@ -62,6 +62,19 @@ class ProfileSetUpActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show() }
             }
+
+            else if(modifyName.isEmpty()) {
+                Toast.makeText(
+                    baseContext, "이름을 입력해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            else if(modifyBirth.isEmpty()) {
+                Toast.makeText(
+                    baseContext, "생년월일을 입력해주세요.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
