@@ -52,7 +52,7 @@ class SignupDialogFragment : DialogFragment() {
         }
     }
     private fun createAccount(email: String, password: String, name: String, birth: String) {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
+        if (email.isNotEmpty() && password.isNotEmpty() && name.isNotEmpty() && birth.isNotEmpty()) {
             auth?.createUserWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -72,6 +72,26 @@ class SignupDialogFragment : DialogFragment() {
                         ).show()
                     }
                 }
+        } else if(email.isEmpty()) {
+            Toast.makeText(
+                context as LoginActivity, "이메일을 입력해주세요.",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (password.isEmpty()) {
+            Toast.makeText(
+                context as LoginActivity, "비밀번호를 입력해주세요.",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (name.isEmpty()) {
+            Toast.makeText(
+                context as LoginActivity, "이름을 입력해주세요.",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else if (birth.isEmpty()) {
+            Toast.makeText(
+                context as LoginActivity, "생년월일을 입력해주세요.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }
